@@ -47,7 +47,9 @@ export default function Products() {
       name: formData.get('name') as string,
       description: formData.get('description') as string,
       price: Number(formData.get('price')),
-      stock: Number(formData.get('stock'))
+      stock: Number(formData.get('stock')),
+      imageUrl: formData.get('imageUrl') as string || 'https://via.placeholder.com/150',
+      category: formData.get('category') as string || 'uncategorized'
     };
 
     if (editingProduct) {
