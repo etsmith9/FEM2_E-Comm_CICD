@@ -5,9 +5,7 @@ import {
   getDoc,
   addDoc,
   updateDoc,
-  deleteDoc,
-  query,
-  where
+  deleteDoc
 } from 'firebase/firestore';
 import { db } from '../firebase/config';
 

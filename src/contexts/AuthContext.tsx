@@ -6,11 +6,10 @@ import {
   signInWithEmailAndPassword,
   signOut,
   onAuthStateChanged,
-  deleteUser,
-  type User as FirebaseUser
+  deleteUser
 } from 'firebase/auth';
 import { FirebaseError } from 'firebase/app';
-import { doc, setDoc, getDoc } from 'firebase/firestore';
+import { doc, setDoc } from 'firebase/firestore';
 import { db } from '../firebase/config';
 
 interface User {

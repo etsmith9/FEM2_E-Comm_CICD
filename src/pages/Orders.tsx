@@ -1,4 +1,3 @@
-import { useState } from 'react';
 import { useQuery } from '@tanstack/react-query';
 import { useAuth } from '../contexts/AuthContext';
 import { orderService } from '../services/orderService';
@@ -6,7 +5,6 @@ import type { Order } from '../services/orderService';
 
 const Orders = () => {
   const { currentUser } = useAuth();
-  const [selectedOrder, setSelectedOrder] = useState<Order | null>(null);
 
   const { data: orders, isLoading, error } = useQuery({
     queryKey: ['orders', currentUser?.uid],
