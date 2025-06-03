@@ -1,4 +1,4 @@
-import { describe, it, expect } from 'vitest';
+import { describe, it, expect, vi } from 'vitest';
 import { render, screen } from '@testing-library/react';
 import { BrowserRouter } from 'react-router-dom';
 import { Provider } from 'react-redux';
@@ -14,17 +14,24 @@ const createMockStore = (initialState = {}) => {
   });
 };
 
+// Mock the AuthContext
+vi.mock('../../contexts/AuthContext', () => ({
+  useAuth: () => ({
+    currentUser: null,
+    logout: vi.fn(),
+  }),
+  AuthProvider: ({ children }: { children: React.ReactNode }) => <>{children}</>,
+}));
+
 describe('Navbar Component', () => {
   it('renders navigation links', () => {
     const store = createMockStore({ items: [] });
     
     render(
       <Provider store={store}>
-        <AuthProvider>
-          <BrowserRouter>
-            <Navbar />
-          </BrowserRouter>
-        </AuthProvider>
+        <BrowserRouter>
+          <Navbar />
+        </BrowserRouter>
       </Provider>
     );
 
@@ -37,11 +44,9 @@ describe('Navbar Component', () => {
     
     render(
       <Provider store={store}>
-        <AuthProvider>
-          <BrowserRouter>
-            <Navbar />
-          </BrowserRouter>
-        </AuthProvider>
+        <BrowserRouter>
+          <Navbar />
+        </BrowserRouter>
       </Provider>
     );
 

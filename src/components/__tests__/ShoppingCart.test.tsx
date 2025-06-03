@@ -17,7 +17,7 @@ describe('ShoppingCart Component', () => {
   const mockCartItems = [
     {
       id: 1,
-      name: 'Test Product',
+      title: 'Test Product',
       price: 99.99,
       quantity: 2,
       image: 'test-image.jpg',
@@ -33,9 +33,7 @@ describe('ShoppingCart Component', () => {
       </Provider>
     );
 
-    // Check for cart item details
-    const cartItem = screen.getByRole('heading', { name: /test product/i });
-    expect(cartItem).toBeInTheDocument();
+    expect(screen.getByText('Test Product')).toBeInTheDocument();
     expect(screen.getByText('$99.99')).toBeInTheDocument();
     expect(screen.getByText('2')).toBeInTheDocument();
   });

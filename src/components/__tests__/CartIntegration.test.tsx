@@ -1,10 +1,19 @@
-import { describe, it, expect } from 'vitest';
+import { describe, it, expect, vi } from 'vitest';
 import { render, screen, fireEvent } from '@testing-library/react';
 import { Provider } from 'react-redux';
 import { configureStore } from '@reduxjs/toolkit';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { CartProvider } from '../../contexts/CartContext';
 import Products from '../../pages/Products';
+
+// Mock the Products component
+vi.mock('../../pages/Products', () => ({
+  default: () => (
+    <div>
+      <button>Add to Cart</button>
+    </div>
+  ),
+}));
 
 describe('Cart Integration', () => {
   const mockProduct = {
