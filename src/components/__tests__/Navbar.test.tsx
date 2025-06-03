@@ -5,7 +5,6 @@ import { Provider } from 'react-redux';
 import { configureStore } from '@reduxjs/toolkit';
 import Navbar from '../Navbar';
 
-// Mock the Redux store
 const createMockStore = (initialState = {}) => {
   return configureStore({
     reducer: {

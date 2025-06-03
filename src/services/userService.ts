@@ -29,9 +29,7 @@ export const userService = {
 
   async deleteUserProfile(userId: string): Promise<void> {
     try {
-      // Delete all user's orders first
       await orderService.deleteUserOrders(userId);
-      // Then delete the user document
       await deleteDoc(doc(db, 'users', userId));
     } catch (error) {
       console.error('Error deleting user profile:', error);

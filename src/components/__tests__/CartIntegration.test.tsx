@@ -31,11 +31,9 @@ describe('Cart Integration', () => {
       </Provider>
     );
 
-    // Find and click the add to cart button
     const addToCartButton = screen.getByText('Add to Cart');
     fireEvent.click(addToCartButton);
 
-    // Verify the button text changes
     expect(screen.getByText('Added to Cart!')).toBeInTheDocument();
   });
 }); 

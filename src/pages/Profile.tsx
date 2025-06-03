@@ -26,9 +26,7 @@ export default function Profile() {
 
   const deleteAccountMutation = useMutation({
     mutationFn: async () => {
-      // First delete Firestore data
       await userService.deleteUserProfile(currentUser!.uid);
-      // Then delete the authentication account
       await deleteAccount();
     },
     onSuccess: () => {

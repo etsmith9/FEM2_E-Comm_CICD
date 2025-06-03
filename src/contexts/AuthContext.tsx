@@ -61,18 +61,15 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
 
   const register = async (email: string, password: string) => {
     try {
-      // Validate email format
       const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
       if (!emailRegex.test(email)) {
         throw new Error('Invalid email format');
       }
 
-      // Validate password
       if (password.length < 6) {
         throw new Error('Password must be at least 6 characters long');
       }
 
-      // Trim email to remove any whitespace
       const trimmedEmail = email.trim();
 
       console.log('Attempting to create user with email:', trimmedEmail);
@@ -82,7 +79,6 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
       
       console.log('User created successfully:', user.uid);
       
-      // Create user document in Firestore
       await setDoc(doc(db, 'users', user.uid), {
         email: user.email,
         createdAt: new Date().toISOString(),

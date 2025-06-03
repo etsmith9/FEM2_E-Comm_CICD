@@ -108,7 +108,6 @@ export const orderService = {
       
       const querySnapshot = await getDocs(ordersQuery);
       
-      // Delete all orders in parallel
       const deletePromises = querySnapshot.docs.map(doc => 
         deleteDoc(doc.ref)
       );
