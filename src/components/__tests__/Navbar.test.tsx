@@ -1,10 +1,10 @@
-import { describe, it, expect, vi } from 'vitest';
+import { describe, it, expect } from 'vitest';
 import { render, screen } from '@testing-library/react';
 import { BrowserRouter } from 'react-router-dom';
 import { Provider } from 'react-redux';
 import { configureStore } from '@reduxjs/toolkit';
 import cartReducer from '../../store/cartSlice';
-import * as AuthContext from '../../contexts/AuthContext';
+import { AuthProvider } from '../../contexts/AuthContext';
 import Navbar from '../Navbar';
 
 // Mock the Redux store
@@ -20,13 +20,6 @@ const createMockStore = (initialState = {}) => {
 };
 
 describe('Navbar Component', () => {
-  beforeEach(() => {
-    vi.spyOn(AuthContext, 'useAuth').mockReturnValue({
-      currentUser: null,
-      logout: vi.fn(),
-    });
-  });
-
   it('renders navigation links', () => {
     const store = createMockStore({ items: [] });
     

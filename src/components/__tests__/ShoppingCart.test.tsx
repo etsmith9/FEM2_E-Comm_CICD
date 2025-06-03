@@ -57,7 +57,7 @@ describe('ShoppingCart Component', () => {
 
     expect(screen.getByRole('heading', { name: 'Test Product' })).toBeInTheDocument();
     expect(screen.getByText('$99.99')).toBeInTheDocument();
-    expect(screen.getByText('2')).toBeInTheDocument();
+    expect(screen.getByTestId('quantity-value')).toHaveTextContent('2');
   });
 
   it('displays empty cart message when cart is empty', () => {

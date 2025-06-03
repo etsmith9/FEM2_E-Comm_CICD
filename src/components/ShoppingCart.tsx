@@ -51,7 +51,7 @@ const ShoppingCart = () => {
                 >
                   -
                 </button>
-                <span className="quantity-value">{item.quantity}</span>
+                <span data-testid="quantity-value" className="quantity-value">{item.quantity}</span>
                 <button
                   onClick={() => handleQuantityChange(item.id, item.quantity + 1)}
                   className="quantity-btn"
