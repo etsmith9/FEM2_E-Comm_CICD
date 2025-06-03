@@ -4,7 +4,7 @@ import { BrowserRouter } from 'react-router-dom';
 import { Provider } from 'react-redux';
 import { configureStore } from '@reduxjs/toolkit';
 import cartReducer from '../../store/cartSlice';
-import * as AuthContext from '../../contexts/AuthContext';
+import { AuthProvider } from '../../contexts/AuthContext';
 import Navbar from '../Navbar';
 
 // Mock the Redux store
