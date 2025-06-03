@@ -3,63 +3,48 @@ import { render, screen, fireEvent } from '@testing-library/react';
 import { Provider } from 'react-redux';
 import { configureStore } from '@reduxjs/toolkit';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
-import { CartProvider } from '../../contexts/CartContext';
-import Products from '../../pages/Products';
+import cartReducer from '../../store/cartSlice';
+import CartIntegration from '../CartIntegration';
 
 // Mock the Products component
-vi.mock('../../pages/Products', () => ({
+vi.mock('../Products', () => ({
   default: () => (
     <div>
-      <button>Add to Cart</button>
+      <button onClick={() => {}}>Add to Cart</button>
     </div>
   ),
 }));
 
-// Mock useQuery
-vi.mock('@tanstack/react-query', async () => {
-  const actual = await vi.importActual('@tanstack/react-query');
-  return {
-    ...actual,
-    useQuery: () => ({
-      data: [],
-      isLoading: false,
-      error: null,
-    }),
-  };
+// Create a new QueryClient for each test
+const createQueryClient = () => new QueryClient({
+  defaultOptions: {
+    queries: {
+      retry: false,
+    },
+  },
 });
 
-describe('Cart Integration', () => {
-  const mockProduct = {
-    id: '1',
-    name: 'Test Product',
-    price: 99.99,
-    description: 'Test Description',
-    imageUrl: 'test.jpg',
-    category: 'test',
-    stock: 10
-  };
-
-  const queryClient = new QueryClient({
-    defaultOptions: {
-      queries: {
-        retry: false,
-      },
+// Mock the Redux store
+const createMockStore = (initialState = {}) => {
+  return configureStore({
+    reducer: {
+      cart: cartReducer
     },
+    preloadedState: {
+      cart: initialState
+    }
   });
+};
 
-  it('updates cart when adding a product', () => {
-    const store = configureStore({
-      reducer: {
-        products: (state = { items: [mockProduct] }) => state
-      }
-    });
-
+describe('CartIntegration Component', () => {
+  it('adds product to cart', () => {
+    const store = createMockStore({ items: [] });
+    const queryClient = createQueryClient();
+    
     render(
       <QueryClientProvider client={queryClient}>
         <Provider store={store}>
-          <CartProvider>
-            <Products />
-          </CartProvider>
+          <CartIntegration />
         </Provider>
       </QueryClientProvider>
     );
@@ -67,6 +52,8 @@ describe('Cart Integration', () => {
     const addToCartButton = screen.getByText('Add to Cart');
     fireEvent.click(addToCartButton);
 
-    expect(screen.getByText('Added to Cart!')).toBeInTheDocument();
+    // Verify cart state was updated
+    const state = store.getState();
+    expect(state.cart.items.length).toBeGreaterThan(0);
   });
 }); 

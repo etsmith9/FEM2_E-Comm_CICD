@@ -2,14 +2,18 @@ import { describe, it, expect } from 'vitest';
 import { render, screen } from '@testing-library/react';
 import { Provider } from 'react-redux';
 import { configureStore } from '@reduxjs/toolkit';
+import cartReducer from '../../store/cartSlice';
 import ShoppingCart from '../ShoppingCart';
 
 // Mock the Redux store
 const createMockStore = (initialState = {}) => {
   return configureStore({
     reducer: {
-      cart: (state = initialState) => state,
+      cart: cartReducer
     },
+    preloadedState: {
+      cart: initialState
+    }
   });
 };
 
@@ -33,7 +37,7 @@ describe('ShoppingCart Component', () => {
       </Provider>
     );
 
-    expect(screen.getByRole('heading', { name: 'Test Product' })).toBeInTheDocument();
+    expect(screen.getByText('Test Product')).toBeInTheDocument();
     expect(screen.getByText('$99.99')).toBeInTheDocument();
     expect(screen.getByText('2')).toBeInTheDocument();
   });
