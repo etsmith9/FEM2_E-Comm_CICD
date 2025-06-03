@@ -3,6 +3,7 @@ import { render, screen } from '@testing-library/react';
 import { BrowserRouter } from 'react-router-dom';
 import { Provider } from 'react-redux';
 import { configureStore } from '@reduxjs/toolkit';
+import { AuthProvider } from '../../contexts/AuthContext';
 import Navbar from '../Navbar';
 
 const createMockStore = (initialState = {}) => {
@@ -19,9 +20,11 @@ describe('Navbar Component', () => {
     
     render(
       <Provider store={store}>
-        <BrowserRouter>
-          <Navbar />
-        </BrowserRouter>
+        <AuthProvider>
+          <BrowserRouter>
+            <Navbar />
+          </BrowserRouter>
+        </AuthProvider>
       </Provider>
     );
 
@@ -34,9 +37,11 @@ describe('Navbar Component', () => {
     
     render(
       <Provider store={store}>
-        <BrowserRouter>
-          <Navbar />
-        </BrowserRouter>
+        <AuthProvider>
+          <BrowserRouter>
+            <Navbar />
+          </BrowserRouter>
+        </AuthProvider>
       </Provider>
     );
 

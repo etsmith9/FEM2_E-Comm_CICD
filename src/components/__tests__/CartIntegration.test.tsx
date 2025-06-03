@@ -2,6 +2,7 @@ import { describe, it, expect } from 'vitest';
 import { render, screen, fireEvent } from '@testing-library/react';
 import { Provider } from 'react-redux';
 import { configureStore } from '@reduxjs/toolkit';
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { CartProvider } from '../../contexts/CartContext';
 import Products from '../../pages/Products';
 
@@ -16,6 +17,14 @@ describe('Cart Integration', () => {
     stock: 10
   };
 
+  const queryClient = new QueryClient({
+    defaultOptions: {
+      queries: {
+        retry: false,
+      },
+    },
+  });
+
   it('updates cart when adding a product', () => {
     const store = configureStore({
       reducer: {
@@ -25,9 +34,11 @@ describe('Cart Integration', () => {
 
     render(
       <Provider store={store}>
-        <CartProvider>
-          <Products />
-        </CartProvider>
+        <QueryClientProvider client={queryClient}>
+          <CartProvider>
+            <Products />
+          </CartProvider>
+        </QueryClientProvider>
       </Provider>
     );
 

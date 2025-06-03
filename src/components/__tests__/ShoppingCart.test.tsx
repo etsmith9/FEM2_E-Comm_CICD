@@ -33,7 +33,9 @@ describe('ShoppingCart Component', () => {
       </Provider>
     );
 
-    expect(screen.getByText('Test Product')).toBeInTheDocument();
+    // Check for cart item details
+    const cartItem = screen.getByRole('heading', { name: /test product/i });
+    expect(cartItem).toBeInTheDocument();
     expect(screen.getByText('$99.99')).toBeInTheDocument();
     expect(screen.getByText('2')).toBeInTheDocument();
   });
