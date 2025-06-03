@@ -7,7 +7,7 @@ import cartReducer from '../../store/cartSlice';
 import CartIntegration from '../CartIntegration';
 
 // Mock the Products component
-vi.mock('../Products', () => ({
+vi.mock('../../pages/Products', () => ({
   default: () => (
     <div>
       <button onClick={() => {}}>Add to Cart</button>

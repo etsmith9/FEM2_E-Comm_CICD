@@ -4,7 +4,7 @@ import { BrowserRouter } from 'react-router-dom';
 import { Provider } from 'react-redux';
 import { configureStore } from '@reduxjs/toolkit';
 import cartReducer from '../../store/cartSlice';
-import { AuthProvider } from '../../contexts/AuthContext';
+import * as AuthContext from '../../contexts/AuthContext';
 import Navbar from '../Navbar';
 
 // Mock the Redux store
@@ -19,16 +19,14 @@ const createMockStore = (initialState = {}) => {
   });
 };
 
-// Mock the AuthContext
-vi.mock('../../contexts/AuthContext', () => ({
-  useAuth: () => ({
-    currentUser: null,
-    logout: vi.fn(),
-  }),
-  AuthProvider: ({ children }: { children: React.ReactNode }) => <>{children}</>,
-}));
-
 describe('Navbar Component', () => {
+  beforeEach(() => {
+    vi.spyOn(AuthContext, 'useAuth').mockReturnValue({
+      currentUser: null,
+      logout: vi.fn(),
+    });
+  });
+
   it('renders navigation links', () => {
     const store = createMockStore({ items: [] });
     

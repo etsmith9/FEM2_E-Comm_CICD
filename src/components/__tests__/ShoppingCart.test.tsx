@@ -1,9 +1,21 @@
-import { describe, it, expect } from 'vitest';
+import { describe, it, expect, vi } from 'vitest';
 import { render, screen } from '@testing-library/react';
 import { Provider } from 'react-redux';
 import { configureStore } from '@reduxjs/toolkit';
 import cartReducer from '../../store/cartSlice';
 import ShoppingCart from '../ShoppingCart';
+
+beforeAll(() => {
+  Object.defineProperty(window, 'sessionStorage', {
+    value: {
+      getItem: vi.fn(),
+      setItem: vi.fn(),
+      removeItem: vi.fn(),
+      clear: vi.fn(),
+    },
+    writable: true,
+  });
+});
 
 // Mock the Redux store
 const createMockStore = (initialState = {}) => {
@@ -25,6 +37,12 @@ describe('ShoppingCart Component', () => {
       price: 99.99,
       quantity: 2,
       image: 'test-image.jpg',
+      description: 'Test Description',
+      category: 'test',
+      rating: {
+        rate: 4.5,
+        count: 100
+      }
     },
   ];
 
@@ -37,7 +55,7 @@ describe('ShoppingCart Component', () => {
       </Provider>
     );
 
-    expect(screen.getByText('Test Product')).toBeInTheDocument();
+    expect(screen.getByRole('heading', { name: 'Test Product' })).toBeInTheDocument();
     expect(screen.getByText('$99.99')).toBeInTheDocument();
     expect(screen.getByText('2')).toBeInTheDocument();
   });
