@@ -15,6 +15,19 @@ vi.mock('../../pages/Products', () => ({
   ),
 }));
 
+// Mock useQuery
+vi.mock('@tanstack/react-query', async () => {
+  const actual = await vi.importActual('@tanstack/react-query');
+  return {
+    ...actual,
+    useQuery: () => ({
+      data: [],
+      isLoading: false,
+      error: null,
+    }),
+  };
+});
+
 describe('Cart Integration', () => {
   const mockProduct = {
     id: '1',
@@ -42,13 +55,13 @@ describe('Cart Integration', () => {
     });
 
     render(
-      <Provider store={store}>
-        <QueryClientProvider client={queryClient}>
+      <QueryClientProvider client={queryClient}>
+        <Provider store={store}>
           <CartProvider>
             <Products />
           </CartProvider>
-        </QueryClientProvider>
-      </Provider>
+        </Provider>
+      </QueryClientProvider>
     );
 
     const addToCartButton = screen.getByText('Add to Cart');

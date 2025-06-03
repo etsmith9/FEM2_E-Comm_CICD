@@ -30,7 +30,9 @@ describe('Navbar Component', () => {
     render(
       <Provider store={store}>
         <BrowserRouter>
-          <Navbar />
+          <AuthProvider>
+            <Navbar />
+          </AuthProvider>
         </BrowserRouter>
       </Provider>
     );
@@ -45,7 +47,9 @@ describe('Navbar Component', () => {
     render(
       <Provider store={store}>
         <BrowserRouter>
-          <Navbar />
+          <AuthProvider>
+            <Navbar />
+          </AuthProvider>
         </BrowserRouter>
       </Provider>
     );

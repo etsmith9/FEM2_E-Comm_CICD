@@ -33,7 +33,7 @@ describe('ShoppingCart Component', () => {
       </Provider>
     );
 
-    expect(screen.getByText('Test Product')).toBeInTheDocument();
+    expect(screen.getByRole('heading', { name: 'Test Product' })).toBeInTheDocument();
     expect(screen.getByText('$99.99')).toBeInTheDocument();
     expect(screen.getByText('2')).toBeInTheDocument();
   });
