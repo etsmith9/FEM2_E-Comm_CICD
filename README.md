@@ -1,3 +1,6 @@
+Please find a description of the assignment I based this project on below. Essentially, I created a e-commerce platform integrated with react and implemented a CI/CD pipeline to maximize functionality.
+The link to my website is https://fem-2-e-comm-cicd-esgwa108d-emilysmiths-projects.vercel.app/.
+
 Implementing CI/CD Pipeline for React E-Commerce App
 The e-commerce project, developed in Module 12, requires a streamlined Continuous Integration and Continuous Deployment (CI/CD) pipeline for optimal performance. This pipeline should automate the process of building, testing, and deploying the application to Vercel, a cloud platform. Key components include setting up a robust CI/CD workflow using GitHub Actions and implementing unit tests for application reliability. 
 
