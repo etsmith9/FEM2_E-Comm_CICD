@@ -1,4 +1,4 @@
-import { describe, it, expect, vi } from 'vitest';
+import { describe, it, expect, vi, beforeAll } from 'vitest';
 import { render, screen } from '@testing-library/react';
 import { Provider } from 'react-redux';
 import { configureStore } from '@reduxjs/toolkit';
@@ -17,8 +17,7 @@ beforeAll(() => {
   });
 });
 
-// Mock the Redux store
-const createMockStore = (initialState = {}) => {
+const createMockStore = (initialState: { items: any[] } = { items: [] }) => {
   return configureStore({
     reducer: {
       cart: cartReducer

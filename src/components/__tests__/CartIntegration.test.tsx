@@ -6,7 +6,6 @@ import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import cartReducer from '../../store/cartSlice';
 import CartIntegration from '../CartIntegration';
 
-// Mock the Products component
 vi.mock('../../pages/Products', () => ({
   default: () => (
     <div>
@@ -15,7 +14,6 @@ vi.mock('../../pages/Products', () => ({
   ),
 }));
 
-// Create a new QueryClient for each test
 const createQueryClient = () => new QueryClient({
   defaultOptions: {
     queries: {
@@ -24,8 +22,7 @@ const createQueryClient = () => new QueryClient({
   },
 });
 
-// Mock the Redux store
-const createMockStore = (initialState = {}) => {
+const createMockStore = (initialState: { items: any[] } = { items: [] }) => {
   return configureStore({
     reducer: {
       cart: cartReducer
@@ -52,7 +49,6 @@ describe('CartIntegration Component', () => {
     const addToCartButton = screen.getByText('Add to Cart');
     fireEvent.click(addToCartButton);
 
-    // Verify cart state was updated
     const state = store.getState();
     expect(state.cart.items.length).toBeGreaterThan(0);
   });

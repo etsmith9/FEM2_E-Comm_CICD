@@ -1,7 +1,6 @@
 import { useQuery } from '@tanstack/react-query';
 import { useAuth } from '../contexts/AuthContext';
 import { orderService } from '../services/orderService';
-// import type { Order } from '../services/orderService';
 
 const Orders = () => {
   const { currentUser } = useAuth();

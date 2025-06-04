@@ -6,15 +6,13 @@ import { configureStore } from '@reduxjs/toolkit';
 import cartReducer from '../../store/cartSlice';
 import Navbar from '../Navbar';
 
-// Mock AuthContext
 const mockUseAuth = vi.fn();
 vi.mock('../../contexts/AuthContext', () => ({
   AuthProvider: ({ children }: { children: React.ReactNode }) => <>{children}</>,
   useAuth: () => mockUseAuth()
 }));
 
-// Mock the Redux store
-const createMockStore = (initialState = {}) => {
+const createMockStore = (initialState: { items: any[] } = { items: [] }) => {
   return configureStore({
     reducer: {
       cart: cartReducer

@@ -334,7 +334,6 @@ body {
   background-color: #16a34a;
 }
 
-/* Auth styles */
 .auth-container {
   display: flex;
   justify-content: center;
@@ -394,7 +393,6 @@ button.delete:hover {
   background-color: #c0392b;
 }
 
-/* Products styles */
 .products-container {
   padding: 2rem;
 }
@@ -426,7 +424,6 @@ button.delete:hover {
   margin-top: 1rem;
 }
 
-/* Orders styles */
 .orders-container {
   padding: 2rem;
 }
@@ -465,7 +462,7 @@ button.delete:hover {
   padding: 1rem 0;
 }
 
-/* Profile styles */
+
 .profile-container {
   max-width: 600px;
   margin: 0 auto;
@@ -485,7 +482,6 @@ button.delete:hover {
   margin-top: 2rem;
 }
 
-/* Error message */
 .error-message {
   background-color: #fde8e8;
   color: var(--danger-color);
@@ -494,7 +490,6 @@ button.delete:hover {
   margin-bottom: 1rem;
 }
 
-/* Loading state */
 .loading {
   display: flex;
   justify-content: center;
