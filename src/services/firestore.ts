@@ -13,7 +13,7 @@ import {
 } from 'firebase/firestore';
 import { db } from '../firebase/config';
 
-export const createUser = async (userId: string, userData: any) => {
+export const createUser = async (userId: string, userData: unknown) => {
   await setDoc(doc(db, 'users', userId), userData);
 };
 
@@ -23,7 +23,7 @@ export const getUser = async (userId: string) => {
   return docSnap.exists() ? docSnap.data() : null;
 };
 
-export const updateUser = async (userId: string, userData: any) => {
+export const updateUser = async (userId: string, userData: unknown) => {
   const userRef = doc(db, 'users', userId);
   await updateDoc(userRef, userData);
 };
@@ -48,7 +48,7 @@ export const getProduct = async (productId: string) => {
   return docSnap.exists() ? { id: docSnap.id, ...docSnap.data() } : null;
 };
 
-export const createProduct = async (productData: any) => {
+export const createProduct = async (productData: unknown) => {
   const productsRef = collection(db, 'products');
   const newProductRef = doc(productsRef);
   await setDoc(newProductRef, {
@@ -58,7 +58,7 @@ export const createProduct = async (productData: any) => {
   return newProductRef.id;
 };
 
-export const updateProduct = async (productId: string, productData: any) => {
+export const updateProduct = async (productId: string, productData: unknown) => {
   const productRef = doc(db, 'products', productId);
   await updateDoc(productRef, productData);
 };
@@ -67,7 +67,7 @@ export const deleteProduct = async (productId: string) => {
   await deleteDoc(doc(db, 'products', productId));
 };
 
-export const createOrder = async (userId: string, orderData: any) => {
+export const createOrder = async (userId: string, orderData: unknown) => {
   const ordersRef = collection(db, 'orders');
   const newOrderRef = doc(ordersRef);
   await setDoc(newOrderRef, {
