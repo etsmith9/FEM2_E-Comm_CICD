@@ -85,11 +85,10 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
       });
 
       console.log('User document created in Firestore');
-    } catch (error) {
-      console.error('Registration error:', error);
-      
-      if (error instanceof FirebaseError) {
-        switch (error.code) {
+    } catch (_error) {
+      // Registration error handled above
+      if (_error instanceof FirebaseError) {
+        switch (_error.code) {
           case 'auth/email-already-in-use':
             throw new Error('Email is already registered');
           case 'auth/invalid-email':
@@ -101,20 +100,20 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
           case 'auth/network-request-failed':
             throw new Error('Network error. Please check your internet connection.');
           default:
-            console.error('Firebase error code:', error.code);
+            console.error('Firebase error code:', _error.code);
             throw new Error('Failed to create account. Please try again.');
         }
       }
-      throw error;
+      throw _error;
     }
   };
 
   const login = async (email: string, password: string) => {
     try {
       await signInWithEmailAndPassword(auth, email, password);
-    } catch (error) {
-      if (error instanceof FirebaseError) {
-        switch (error.code) {
+    } catch (_error) {
+      if (_error instanceof FirebaseError) {
+        switch (_error.code) {
           case 'auth/user-not-found':
             throw new Error('No account found with this email');
           case 'auth/wrong-password':
@@ -127,14 +126,14 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
             throw new Error('Failed to login');
         }
       }
-      throw error;
+      throw _error;
     }
   };
 
   const logout = async () => {
     try {
       await signOut(auth);
-    } catch (error) {
+    } catch {
       throw new Error('Failed to logout');
     }
   };
@@ -147,9 +146,9 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
       }
       await deleteUser(user);
       setCurrentUser(null);
-    } catch (error) {
-      console.error('Error deleting account:', error);
-      throw error;
+    } catch (_error) {
+      console.error('Error deleting account:', _error);
+      throw _error;
     }
   };
 

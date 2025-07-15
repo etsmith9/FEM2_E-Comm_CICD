@@ -22,7 +22,7 @@ const createQueryClient = () => new QueryClient({
   },
 });
 
-const createMockStore = (initialState: { items: any[] } = { items: [] }) => {
+const createMockStore = (initialState: { items: unknown[] } = { items: [] }) => {
   return configureStore({
     reducer: {
       cart: cartReducer
